@@ -1,9 +1,10 @@
 interface NavbarProps {
-  onShowStats: () => void;
   onShowSettings: () => void;
+  onNavigateStats: () => void;
+  isGameActive?: boolean;
 }
 
-export const Navbar = ({ onShowStats, onShowSettings }: NavbarProps) => {
+export const Navbar = ({ onShowSettings, onNavigateStats }: NavbarProps) => {
   return (
     <header className="navbar">
       <div className="logo">
@@ -13,7 +14,7 @@ export const Navbar = ({ onShowStats, onShowSettings }: NavbarProps) => {
       </div>
 
       <nav className="nav-menu">
-        <button className="nav-btn" onClick={onShowStats}>
+        <button className="nav-btn" onClick={onNavigateStats}>
           <span className="btn-label">STATS</span>
           <span className="btn-underline"></span>
         </button>

@@ -20,7 +20,7 @@ export const NameInputModal = ({
   canSave,
 }: NameInputModalProps) => {
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={onSkip}>
       <div className="modal name-input-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">SAVE YOUR SCORE</h2>

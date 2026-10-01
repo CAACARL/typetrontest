@@ -19,7 +19,7 @@ export const GraphResultsModal = ({
   onSkip,
 }: GraphResultsModalProps) => {
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={onSkip}>
       <div className="modal graph-results-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">PERFORMANCE ANALYSIS</h2>

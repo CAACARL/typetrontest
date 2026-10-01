@@ -6,7 +6,6 @@ interface SettingsModalProps {
   onModeChange: (mode: string) => void;
   onDifficultyChange: (difficulty: string) => void;
   onSoundToggle: (enabled: boolean) => void;
-  onClearStats: () => void;
   playSound: (frequency: number, duration: number, type: OscillatorType) => void;
 }
 
@@ -18,7 +17,6 @@ export const SettingsModal = ({
   onModeChange,
   onDifficultyChange,
   onSoundToggle,
-  onClearStats,
   playSound,
 }: SettingsModalProps) => {
   const modes = [
@@ -91,13 +89,6 @@ export const SettingsModal = ({
                 DISABLED
               </button>
             </div>
-          </div>
-          
-          <div className="setting-group">
-            <label className="setting-label">DATA MANAGEMENT</label>
-            <button className="danger-btn" onClick={onClearStats}>
-              CLEAR ALL STATS
-            </button>
           </div>
         </div>
       </div>

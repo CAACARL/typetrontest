@@ -13,25 +13,25 @@ export const WpmGraph = ({ data, duration }: WpmGraphProps) => {
   const paddedMaxWpm = Math.ceil(maxWpm * 1.1 / 10) * 10;
   
   const points = data.map(d => {
-    const x = (d.time / maxTime) * 580 + 10;
-    const y = 180 - ((d.wpm / paddedMaxWpm) * 160) + 10;
+    const x = (d.time / maxTime) * 480 + 10;
+    const y = 110 - ((d.wpm / paddedMaxWpm) * 90) + 10;
     return `${x},${y}`;
   }).join(' ');
   
-  const areaPoints = `10,190 ${points} 590,190`;
+  const areaPoints = `10,120 ${points} 490,120`;
   
   return (
     <div className="wpm-graph-container">
       <div className="graph-title">PERFORMANCE GRAPH</div>
       <div className="wpm-graph">
-        <svg width="100%" height="220" viewBox="0 0 600 220" preserveAspectRatio="xMidYMid meet">
+        <svg width="100%" height="140" viewBox="0 0 500 140" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="graphGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#00ff88" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#00ff88" stopOpacity="0.3" />
               <stop offset="100%" stopColor="#00ff88" stopOpacity="0.05" />
             </linearGradient>
             <filter id="glow">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
               <feMerge>
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
@@ -39,27 +39,27 @@ export const WpmGraph = ({ data, duration }: WpmGraphProps) => {
             </filter>
           </defs>
           
-          <rect x="10" y="10" width="580" height="180" fill="rgba(0, 0, 0, 0.3)" stroke="#1a2332" strokeWidth="1"/>
+          <rect x="10" y="10" width="480" height="110" fill="rgba(0, 0, 0, 0.3)" stroke="#1a2332" strokeWidth="1"/>
           
-          {[0, 1, 2, 3, 4].map(i => (
+          {[0, 1, 2].map(i => (
             <g key={`grid-${i}`}>
               <line
                 x1="10"
-                y1={10 + i * 45}
-                x2="590"
-                y2={10 + i * 45}
+                y1={10 + i * 55}
+                x2="490"
+                y2={10 + i * 55}
                 stroke="#2a3f5f"
                 strokeWidth="1"
-                opacity="0.5"
+                opacity="0.4"
               />
               <text
-                x="595"
-                y={10 + i * 45 + 4}
+                x="495"
+                y={10 + i * 55 + 4}
                 fill="#8892b0"
-                fontSize="10"
+                fontSize="9"
                 fontFamily="Orbitron, monospace"
               >
-                {Math.round(paddedMaxWpm - (i * paddedMaxWpm / 4))}
+                {Math.round(paddedMaxWpm - (i * paddedMaxWpm / 2))}
               </text>
             </g>
           ))}
@@ -73,21 +73,21 @@ export const WpmGraph = ({ data, duration }: WpmGraphProps) => {
             points={points}
             fill="none"
             stroke="#00ff88"
-            strokeWidth="3"
+            strokeWidth="2.5"
             strokeLinejoin="round"
             strokeLinecap="round"
             filter="url(#glow)"
           />
           
           {data.map((d, i) => {
-            const x = (d.time / maxTime) * 580 + 10;
-            const y = 180 - ((d.wpm / paddedMaxWpm) * 160) + 10;
+            const x = (d.time / maxTime) * 480 + 10;
+            const y = 110 - ((d.wpm / paddedMaxWpm) * 90) + 10;
             return (
               <circle
                 key={i}
                 cx={x}
                 cy={y}
-                r="4"
+                r="3"
                 fill="#00ff88"
                 filter="url(#glow)"
               />

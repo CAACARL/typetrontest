@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import type { TestResult, TypeMetrics, WpmDataPoint } from "../types";
 import { generateText } from "../utils/textGeneration";
 import { generateCode } from "../utils/codeGeneration";
@@ -10,12 +10,12 @@ import { HUD } from "../components/HUD";
 import { DurationSelector } from "../components/DurationSelector";
 import { TypingArea } from "../components/TypingArea";
 import { MilestoneAnimation } from "../components/MilestoneAnimation";
-import { StatsModal } from "../components/modals/StatsModal";
 import { SettingsModal } from "../components/modals/SettingsModal";
-import { ConfirmModal } from "../components/modals/ConfirmModal";
 import { GraphResultsModal } from "../components/modals/GraphResultsModal";
 import { NameInputModal } from "../components/modals/NameInputModal";
-import { GameDetailModal } from "../components/modals/GameDetailModal";
+import { ConfirmModal } from "../components/modals/ConfirmModal";
+import { TermsModal } from "../components/modals/TermsModal";
+import { PrivacyModal } from "../components/modals/PrivacyModal";
 
 const profileIcons = ["👤", "🎮", "⚡", "🔥", "💎", "🌟", "🚀", "🎯", "👾", "🤖", "🦾", "💀"];
 
@@ -28,23 +28,24 @@ export const HomePage = () => {
   const [timeLeft, setTimeLeft] = useState(60);
   const [isFinished, setIsFinished] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [isGlitching, setIsGlitching] = useState(false);
+  const [isQuitting, setIsQuitting] = useState(false);
+  const [hasWarped, setHasWarped] = useState(false);
   
   // Modal states
-  const [showStats, setShowStats] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [showGraphResults, setShowGraphResults] = useState(false);
   const [showNameInput, setShowNameInput] = useState(false);
-  const [showGameDetail, setShowGameDetail] = useState(false);
+  const [showQuitConfirm, setShowQuitConfirm] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [pendingNavigation, setPendingNavigation] = useState<string | null>(null);
   
-  // Filter states
-  const [statsFilterMode, setStatsFilterMode] = useState<string>("all");
-  const [statsFilterDuration, setStatsFilterDuration] = useState<number | "all">("all");
+  const navigate = useNavigate();
   
   // Player states
   const [playerName, setPlayerName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState(profileIcons[0]);
-  const [selectedGame, setSelectedGame] = useState<TestResult | null>(null);
   const [pendingResult, setPendingResult] = useState<Omit<TestResult, "playerName" | "profileIcon"> | null>(null);
   
   // Settings with localStorage
@@ -114,9 +115,14 @@ export const HomePage = () => {
     setUserInput("");
     setTimeLeft(selectedDuration);
     setIsFinished(false);
-    setIsStarted(true);
+    setIsGlitching(true);
+    setTimeout(() => {
+      setIsStarted(true);
+    }, 600);
+    setTimeout(() => {
+      setHasWarped(true);
+    }, 1500); // After warp animations complete
     setElapsedTime(0);
-    setShowStats(false);
     setShowSettings(false);
     setCombo(0);
     setMaxCombo(0);
@@ -132,10 +138,11 @@ export const HomePage = () => {
   };
 
   const resetTest = () => {
+    setTargetText(getRandomTextForMode(mode, difficulty));
     setUserInput("");
     setTimeLeft(selectedDuration);
     setIsFinished(false);
-    setIsStarted(false);
+    setIsStarted(true);
     setElapsedTime(0);
     setCombo(0);
     setMaxCombo(0);
@@ -147,6 +154,90 @@ export const HomePage = () => {
       incorrectChars: 0,
       totalKeystrokes: 0,
     });
+    playSound(400, 0.15, "square");
+  };
+  const quitTest = () => {
+    setIsQuitting(true);
+    playSound(200, 0.3, "sawtooth");
+    setTimeout(() => {
+      setUserInput("");
+      setTimeLeft(selectedDuration);
+      setIsFinished(false);
+      setIsStarted(false);
+      setIsGlitching(false);
+      setIsQuitting(false);
+      setHasWarped(false);
+      setElapsedTime(0);
+      setCombo(0);
+      setMaxCombo(0);
+      setVisibleStartIndex(0);
+      setWpmHistory([]);
+      setShowGraphResults(false);
+      setMetrics({
+        correctChars: 0,
+        incorrectChars: 0,
+        totalKeystrokes: 0,
+      });
+    }, 1200);
+  };
+
+  const handleNavigateWithQuit = (destination: string) => {
+    if (isStarted && !isFinished) {
+      setPendingNavigation(destination);
+      setShowQuitConfirm(true);
+    } else {
+      if (destination === 'settings') {
+        setShowSettings(true);
+      } else if (destination === 'terms') {
+        setShowTerms(true);
+      } else if (destination === 'privacy') {
+        setShowPrivacy(true);
+      } else {
+        navigate(destination);
+      }
+    }
+  };
+
+  const confirmQuit = () => {
+    setShowQuitConfirm(false);
+    setIsQuitting(true);
+    playSound(200, 0.3, "sawtooth");
+    
+    setTimeout(() => {
+      setUserInput("");
+      setTimeLeft(selectedDuration);
+      setIsFinished(false);
+      setIsStarted(false);
+      setIsGlitching(false);
+      setIsQuitting(false);
+      setHasWarped(false);
+      setElapsedTime(0);
+      setCombo(0);
+      setMaxCombo(0);
+      setVisibleStartIndex(0);
+      setWpmHistory([]);
+      setMetrics({
+        correctChars: 0,
+        incorrectChars: 0,
+        totalKeystrokes: 0,
+      });
+      
+      if (pendingNavigation === 'settings') {
+        setShowSettings(true);
+      } else if (pendingNavigation === 'terms') {
+        setShowTerms(true);
+      } else if (pendingNavigation === 'privacy') {
+        setShowPrivacy(true);
+      } else if (pendingNavigation) {
+        navigate(pendingNavigation);
+      }
+      setPendingNavigation(null);
+    }, 1200);
+  };
+
+  const cancelQuit = () => {
+    setShowQuitConfirm(false);
+    setPendingNavigation(null);
   };
 
   const handleDurationSelect = (duration: number) => {
@@ -243,13 +334,6 @@ export const HomePage = () => {
     }
   };
 
-  const handleClearStats = () => {
-    setTestHistory([]);
-    playSound(300, 0.2, "sawtooth");
-    setShowClearConfirm(false);
-    setShowSettings(false);
-  };
-
   // Initialize target text
   useEffect(() => {
     if (!targetText) {
@@ -319,14 +403,11 @@ export const HomePage = () => {
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        if (showClearConfirm) {
-          setShowClearConfirm(false);
-        } else if (showGraphResults) {
+        if (showGraphResults) {
           skipSave();
         } else if (showNameInput) {
           skipSave();
-        } else if (showStats || showSettings) {
-          setShowStats(false);
+        } else if (showSettings) {
           setShowSettings(false);
         }
       } else if (e.key === 'Enter') {
@@ -334,7 +415,7 @@ export const HomePage = () => {
           continueToNameInput();
         } else if (showNameInput && playerName.trim()) {
           saveResult();
-        } else if (!isStarted && !isFinished && !showStats && !showSettings && !showClearConfirm && !showNameInput && !showGraphResults) {
+        } else if (!isStarted && !isFinished && !showSettings && !showNameInput && !showGraphResults) {
           startTest();
         } else if (isFinished && !showGraphResults && !showNameInput) {
           startTest();
@@ -344,7 +425,7 @@ export const HomePage = () => {
     
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [showStats, showSettings, showClearConfirm, showNameInput, showGraphResults, playerName, isStarted, isFinished, selectedDuration]);
+  }, [showSettings, showNameInput, showGraphResults, playerName, isStarted, isFinished, selectedDuration]);
 
   // Scroll visible text
   const charsPerLine = 60;
@@ -365,141 +446,165 @@ export const HomePage = () => {
       )}
       
       <Navbar 
-        onShowStats={() => setShowStats(!showStats)}
-        onShowSettings={() => setShowSettings(!showSettings)}
+        onShowSettings={() => handleNavigateWithQuit('settings')}
+        onNavigateStats={() => handleNavigateWithQuit('/stats')}
+        isGameActive={isStarted && !isFinished}
       />
 
       <main className="main">
-        {showStats && (
-          <StatsModal
-            testHistory={testHistory}
-            statsFilterMode={statsFilterMode}
-            statsFilterDuration={statsFilterDuration}
-            onClose={() => setShowStats(false)}
-            onFilterModeChange={setStatsFilterMode}
-            onFilterDurationChange={setStatsFilterDuration}
-            onGameClick={(game) => {
-              setSelectedGame(game);
-              setShowGameDetail(true);
-            }}
-          />
-        )}
-
-        {showGameDetail && selectedGame && (
-          <GameDetailModal
-            game={selectedGame}
-            onClose={() => setShowGameDetail(false)}
-          />
-        )}
-
-        {showSettings && (
-          <SettingsModal
-            mode={mode}
-            difficulty={difficulty}
-            soundEnabled={soundEnabled}
-            onClose={() => setShowSettings(false)}
-            onModeChange={handleModeChange}
-            onDifficultyChange={handleDifficultyChange}
-            onSoundToggle={setSoundEnabled}
-            onClearStats={() => setShowClearConfirm(true)}
-            playSound={playSound}
-          />
-        )}
-
-        {showClearConfirm && (
-          <ConfirmModal
-            title="CONFIRM ACTION"
-            message="Clear all saved statistics? This action cannot be undone."
-            confirmText="CLEAR DATA"
-            cancelText="CANCEL"
-            onConfirm={handleClearStats}
-            onCancel={() => setShowClearConfirm(false)}
-            isDanger={true}
-          />
-        )}
-
-        {showGraphResults && pendingResult && (
-          <GraphResultsModal
-            pendingResult={pendingResult}
-            wpmHistory={wpmHistory}
-            maxCombo={maxCombo}
-            elapsedTime={elapsedTime}
-            onContinue={continueToNameInput}
-            onSkip={skipSave}
-          />
-        )}
-
-        {showNameInput && (
-          <NameInputModal
-            playerName={playerName}
-            selectedIcon={selectedIcon}
-            onNameChange={setPlayerName}
-            onIconSelect={setSelectedIcon}
-            onSave={saveResult}
-            onSkip={skipSave}
-            canSave={playerName.trim().length > 0}
-          />
+        {isQuitting && (
+          <div className="red-static-overlay"></div>
         )}
 
         <section className="game-area">
-          <DurationSelector
-            selectedDuration={selectedDuration}
-            isStarted={isStarted}
-            isFinished={isFinished}
-            onSelectDuration={handleDurationSelect}
-          />
+          {!isGlitching && !isStarted && !isFinished && (
+            <DurationSelector
+              selectedDuration={selectedDuration}
+              isStarted={isStarted}
+              isFinished={isFinished}
+              onSelectDuration={handleDurationSelect}
+            />
+          )}
+          
+          {isGlitching && (
+            <div className="glitch-disappear">
+              <DurationSelector
+                selectedDuration={selectedDuration}
+                isStarted={false}
+                isFinished={isFinished}
+                onSelectDuration={handleDurationSelect}
+              />
+            </div>
+          )}
 
-          <HUD
-            timeLeft={timeLeft}
-            wpm={wpm}
-            accuracy={accuracy}
-            errors={metrics.incorrectChars}
-          />
+          {(isStarted || isFinished) && (
+            <div className={!hasWarped ? "warp-in" : ""}>
+              <HUD
+                timeLeft={timeLeft}
+                wpm={wpm}
+                accuracy={accuracy}
+                errors={metrics.incorrectChars}
+                isFinished={isFinished}
+                bestWpm={bestWpm}
+              />
+            </div>
+          )}
 
-          <TypingArea
-            isStarted={isStarted}
-            isFinished={isFinished}
-            targetText={targetText}
-            userInput={userInput}
-            visibleStartIndex={visibleStartIndex}
-            onInputChange={handleInputChange}
-            maxCombo={maxCombo}
-            wpm={wpm}
-            accuracy={accuracy}
-            errors={metrics.incorrectChars}
-            elapsedTime={elapsedTime}
-            bestWpm={bestWpm}
-          />
-
-          <div className="control-panel">
-            <button
-              className={`game-btn primary ${isStarted && !isFinished ? "disabled" : ""}`}
-              onClick={isFinished || !isStarted ? startTest : undefined}
-              disabled={isStarted && !isFinished}
-            >
-              <span className="btn-text">
-                {isFinished ? "RACE AGAIN" : isStarted ? "RACING..." : "START RACE"}
-              </span>
-              <span className="btn-glow"></span>
-            </button>
-            {isStarted && !isFinished && (
-              <button className="game-btn secondary" onClick={resetTest}>
-                <span className="btn-text">RESTART</span>
+          {!isGlitching && !isStarted && !isFinished && (
+            <div className="ready-screen-standalone">
+              <div className="ready-text">READY TO HIT THE GRID?</div>
+              <div className="ready-subtitle">Press START or hit the enter key to begin</div>
+              <button className="game-btn primary start-btn-inline" onClick={startTest}>
+                <span className="btn-text">START RACE</span>
                 <span className="btn-glow"></span>
               </button>
-            )}
-          </div>
+            </div>
+          )}
+          
+          {isGlitching && (
+            <div className="ready-screen-standalone glitch-disappear">
+              <div className="ready-text">READY TO HIT THE GRID?</div>
+              <div className="ready-subtitle">Press START or hit the enter key to begin</div>
+              <button className="game-btn primary start-btn-inline">
+                <span className="btn-text">START RACE</span>
+                <span className="btn-glow"></span>
+              </button>
+            </div>
+          )}
+
+          {(isStarted || isFinished) && (
+            <div className={!hasWarped ? "warp-in-delayed" : ""}>
+              <TypingArea
+                isStarted={isStarted}
+                isFinished={isFinished}
+                targetText={targetText}
+                userInput={userInput}
+                visibleStartIndex={visibleStartIndex}
+                onInputChange={handleInputChange}
+                onRestart={resetTest}
+                onQuit={quitTest}
+                maxCombo={maxCombo}
+                wpm={wpm}
+                accuracy={accuracy}
+                errors={metrics.incorrectChars}
+                elapsedTime={elapsedTime}
+              />
+            </div>
+          )}
         </section>
       </main>
 
       <footer className="footer">
         <div className="footer-text">
-          <Link to="/terms" className="footer-link">Terms</Link>
+          <button 
+            className="footer-link" 
+            onClick={() => handleNavigateWithQuit('terms')}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          >
+            Terms
+          </button>
           <span className="footer-separator">|</span>
-          <Link to="/privacy" className="footer-link">Privacy</Link>
+          <button 
+            className="footer-link" 
+            onClick={() => handleNavigateWithQuit('privacy')}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          >
+            Privacy
+          </button>
         </div>
         <div className="footer-version">v1.0.0</div>
       </footer>
+
+      {showSettings && (
+        <SettingsModal
+          mode={mode}
+          difficulty={difficulty}
+          soundEnabled={soundEnabled}
+          onClose={() => setShowSettings(false)}
+          onModeChange={handleModeChange}
+          onDifficultyChange={handleDifficultyChange}
+          onSoundToggle={setSoundEnabled}
+          playSound={playSound}
+        />
+      )}
+
+      {showGraphResults && pendingResult && (
+        <GraphResultsModal
+          pendingResult={pendingResult}
+          wpmHistory={wpmHistory}
+          maxCombo={maxCombo}
+          elapsedTime={elapsedTime}
+          onContinue={continueToNameInput}
+          onSkip={skipSave}
+        />
+      )}
+
+      {showNameInput && (
+        <NameInputModal
+          playerName={playerName}
+          selectedIcon={selectedIcon}
+          onNameChange={setPlayerName}
+          onIconSelect={setSelectedIcon}
+          onSave={saveResult}
+          onSkip={skipSave}
+          canSave={playerName.trim().length > 0}
+        />
+      )}
+
+      {showQuitConfirm && (
+        <ConfirmModal
+          title="QUIT CURRENT TEST?"
+          message="You are currently in an active typing test. Quitting will discard your progress. Are you sure you want to quit?"
+          confirmText="QUIT"
+          cancelText="CONTINUE TYPING"
+          onConfirm={confirmQuit}
+          onCancel={cancelQuit}
+          isDanger={true}
+        />
+      )}
+
+      {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}
+      {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
     </div>
   );
 };

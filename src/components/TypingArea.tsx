@@ -7,12 +7,13 @@ interface TypingAreaProps {
   userInput: string;
   visibleStartIndex: number;
   onInputChange: (value: string) => void;
+  onRestart: () => void;
+  onQuit: () => void;
   maxCombo: number;
   wpm: number;
   accuracy: number;
   errors: number;
   elapsedTime: number;
-  bestWpm: number;
 }
 
 export const TypingArea = ({
@@ -22,12 +23,13 @@ export const TypingArea = ({
   userInput,
   visibleStartIndex,
   onInputChange,
+  onRestart,
+  onQuit,
   maxCombo,
   wpm,
   accuracy,
   errors,
   elapsedTime,
-  bestWpm,
 }: TypingAreaProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -45,13 +47,6 @@ export const TypingArea = ({
 
   return (
     <div className="typing-area" onClick={() => inputRef.current?.focus()}>
-      {!isStarted && !isFinished && (
-        <div className="ready-screen">
-          <div className="ready-text">READY TO HIT THE GRID?</div>
-          <div className="ready-subtitle">Press START or hit the enter key to begin</div>
-        </div>
-      )}
-      
       <div className="text-display">
         {visibleText.split("").map((character, index) => {
           const actualIndex = startChar + index;
@@ -89,14 +84,21 @@ export const TypingArea = ({
         disabled={!isStarted || isFinished}
       />
 
+      {(isStarted || isFinished) && (
+        <div className="typing-controls">
+          <button className="game-btn secondary" onClick={onRestart}>
+            <span className="btn-text">RESTART</span>
+            <span className="btn-glow"></span>
+          </button>
+          <button className="game-btn danger" onClick={onQuit}>
+            <span className="btn-text">QUIT</span>
+            <span className="btn-glow"></span>
+          </button>
+        </div>
+      )}
+
       {isFinished && (
         <div className="results">
-          <div className="results-header">
-            <div className="results-title">RACE COMPLETE</div>
-            {wpm > bestWpm && bestWpm > 0 && (
-              <div className="new-record">NEW RECORD!</div>
-            )}
-          </div>
           <div className="results-grid">
             <div className="result-card">
               <div className="result-label">WPM</div>
