@@ -171,6 +171,13 @@ Contributions are welcome! Feel free to:
 - Suggest features
 - Submit pull requests
 
+## 📄 Legal
+
+- **[Terms of Service](/terms)** - Usage terms and conditions
+- **[Privacy Policy](/privacy)** - Data handling and privacy practices
+
+All typing data is stored locally in your browser. No personal information is collected or transmitted to external servers.
+
 ## 📝 License
 
 This project is open source and available under the [MIT License](LICENSE).
