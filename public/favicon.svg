@@ -9,7 +9,9 @@
       </feMerge>
     </filter>
   </defs>
-  <text x="50" y="70" font-family="monospace" font-size="48" font-weight="900" text-anchor="middle" fill="#00ff88" filter="url(#glow)">TTT</text>
+  <text x="22" y="70" font-family="monospace" font-size="48" font-weight="900" text-anchor="middle" fill="#ffffff" filter="url(#glow)">T</text>
+  <text x="50" y="70" font-family="monospace" font-size="48" font-weight="900" text-anchor="middle" fill="#00ff88" filter="url(#glow)">T</text>
+  <text x="78" y="70" font-family="monospace" font-size="48" font-weight="900" text-anchor="middle" fill="#ffffff" filter="url(#glow)">T</text>
   <rect x="10" y="10" width="20" height="4" fill="#00ff88" filter="url(#glow)"/>
   <rect x="70" y="10" width="20" height="4" fill="#00ff88" filter="url(#glow)"/>
 </svg>
