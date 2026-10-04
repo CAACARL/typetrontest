@@ -89,7 +89,7 @@ The production build will be in the `dist/` folder.
 
 1. **Select Duration**: Choose 15s, 30s, 60s, or 120s
 2. **Choose Mode**: Pick a programming language or text mode
-3. **Start Race**: Press Enter or click "START RACE"
+3. **Start**: Press Enter or click "START"
 4. **Type Away**: Match the displayed text as accurately as possible
 5. **View Results**: See your performance graph and stats
 6. **Save Score**: Enter your name and pick an icon

@@ -10,6 +10,7 @@ import { HUD } from "../components/HUD";
 import { DurationSelector } from "../components/DurationSelector";
 import { TypingArea } from "../components/TypingArea";
 import { MilestoneAnimation } from "../components/MilestoneAnimation";
+import { MatrixWaterfall } from "../components/MatrixWaterfall";
 import { SettingsModal } from "../components/modals/SettingsModal";
 import { GraphResultsModal } from "../components/modals/GraphResultsModal";
 import { NameInputModal } from "../components/modals/NameInputModal";
@@ -119,6 +120,9 @@ export const HomePage = () => {
     setTimeout(() => {
       setIsStarted(true);
     }, 600);
+    setTimeout(() => {
+      setIsGlitching(false); // Turn off glitching after animation
+    }, 1200);
     setTimeout(() => {
       setHasWarped(true);
     }, 1500); // After warp animations complete
@@ -441,6 +445,13 @@ export const HomePage = () => {
       <div className="scanlines"></div>
       <div className="grid-bg"></div>
       
+      {((!isStarted && !isFinished) || isGlitching) && (
+        <>
+          <MatrixWaterfall key="left-waterfall" side="left" isDisappearing={isGlitching} />
+          <MatrixWaterfall key="right-waterfall" side="right" isDisappearing={isGlitching} />
+        </>
+      )}
+      
       {comboMilestone && (
         <MilestoneAnimation milestone={comboMilestone} color={getComboColor(comboMilestone)} />
       )}
@@ -495,7 +506,7 @@ export const HomePage = () => {
               <div className="ready-text">READY TO HIT THE GRID?</div>
               <div className="ready-subtitle">Press START or hit the enter key to begin</div>
               <button className="game-btn primary start-btn-inline" onClick={startTest}>
-                <span className="btn-text">START RACE</span>
+                <span className="btn-text">START</span>
                 <span className="btn-glow"></span>
               </button>
             </div>
@@ -506,7 +517,7 @@ export const HomePage = () => {
               <div className="ready-text">READY TO HIT THE GRID?</div>
               <div className="ready-subtitle">Press START or hit the enter key to begin</div>
               <button className="game-btn primary start-btn-inline">
-                <span className="btn-text">START RACE</span>
+                <span className="btn-text">START</span>
                 <span className="btn-glow"></span>
               </button>
             </div>

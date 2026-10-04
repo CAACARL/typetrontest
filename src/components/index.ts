@@ -4,3 +4,4 @@ export { DurationSelector } from './DurationSelector';
 export { TypingArea } from './TypingArea';
 export { MilestoneAnimation } from './MilestoneAnimation';
 export { WpmGraph } from './WpmGraph';
+export { MatrixWaterfall } from './MatrixWaterfall';
