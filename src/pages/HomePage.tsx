@@ -410,7 +410,6 @@ export const HomePage = () => {
       };
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPendingResult(result);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowGraphResults(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -561,11 +560,6 @@ export const HomePage = () => {
                 onInputChange={handleInputChange}
                 onRestart={resetTest}
                 onQuit={quitTest}
-                maxCombo={maxCombo}
-                wpm={wpm}
-                accuracy={accuracy}
-                errors={metrics.incorrectChars}
-                elapsedTime={elapsedTime}
               />
             </div>
           )}

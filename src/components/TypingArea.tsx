@@ -10,11 +10,6 @@ interface TypingAreaProps {
   onInputChange: (value: string) => void;
   onRestart: () => void;
   onQuit: () => void;
-  maxCombo: number;
-  wpm: number;
-  accuracy: number;
-  errors: number;
-  elapsedTime: number;
 }
 
 export const TypingArea = ({
@@ -27,11 +22,6 @@ export const TypingArea = ({
   onInputChange,
   onRestart,
   onQuit,
-  maxCombo,
-  wpm,
-  accuracy,
-  errors,
-  elapsedTime,
 }: TypingAreaProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
