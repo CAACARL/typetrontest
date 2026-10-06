@@ -32,7 +32,7 @@ export const HomePage = () => {
   const [isGlitching, setIsGlitching] = useState(false);
   const [isQuitting, setIsQuitting] = useState(false);
   const [hasWarped, setHasWarped] = useState(false);
-  
+
   // Modal states
   const [showSettings, setShowSettings] = useState(false);
   const [showGraphResults, setShowGraphResults] = useState(false);
@@ -41,20 +41,23 @@ export const HomePage = () => {
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState<string | null>(null);
-  
+
   const navigate = useNavigate();
-  
+
   // Player states
   const [playerName, setPlayerName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState(profileIcons[0]);
-  const [pendingResult, setPendingResult] = useState<Omit<TestResult, "playerName" | "profileIcon"> | null>(null);
-  
+  const [pendingResult, setPendingResult] = useState<Omit<
+    TestResult,
+    "playerName" | "profileIcon"
+  > | null>(null);
+
   // Settings with localStorage
   const [testHistory, setTestHistory] = useLocalStorage<TestResult[]>("typingTestHistory", []);
   const [difficulty, setDifficulty] = useLocalStorage("difficulty", "medium");
   const [mode, setMode] = useLocalStorage("mode", "javascript");
   const [soundEnabled, setSoundEnabled] = useLocalStorage("soundEnabled", true);
-  
+
   // Typing metrics
   const [combo, setCombo] = useState(0);
   const [maxCombo, setMaxCombo] = useState(0);
@@ -66,7 +69,7 @@ export const HomePage = () => {
     totalKeystrokes: 0,
   });
   const [wpmHistory, setWpmHistory] = useState<WpmDataPoint[]>([]);
-  
+
   // Audio hook
   const { playSound } = useAudio(soundEnabled);
 
@@ -87,7 +90,7 @@ export const HomePage = () => {
 
   const checkComboMilestone = (newCombo: number) => {
     const milestones = [10, 20, 40, 60, 80, 100];
-    const milestone = milestones.find(m => newCombo === m);
+    const milestone = milestones.find((m) => newCombo === m);
     if (milestone) {
       setComboMilestone(milestone);
       playSound(1200, 0.3, "sine");
@@ -96,17 +99,18 @@ export const HomePage = () => {
   };
 
   // Calculate current stats
-  const accuracy = metrics.totalKeystrokes === 0 
-    ? 100 
-    : Math.round((metrics.correctChars / metrics.totalKeystrokes) * 100);
+  const accuracy =
+    metrics.totalKeystrokes === 0
+      ? 100
+      : Math.round((metrics.correctChars / metrics.totalKeystrokes) * 100);
 
-  const rawWpm = elapsedTime === 0 
-    ? 0 
-    : Math.round((metrics.totalKeystrokes / 5) / (elapsedTime / 60));
+  const rawWpm =
+    elapsedTime === 0 ? 0 : Math.round(metrics.totalKeystrokes / 5 / (elapsedTime / 60));
 
-  const wpm = elapsedTime === 0 
-    ? 0 
-    : Math.round(((metrics.totalKeystrokes / 5) - (metrics.incorrectChars / 5)) / (elapsedTime / 60));
+  const wpm =
+    elapsedTime === 0
+      ? 0
+      : Math.round((metrics.totalKeystrokes / 5 - metrics.incorrectChars / 5) / (elapsedTime / 60));
 
   const bestWpm = testHistory.length > 0 ? Math.max(...testHistory.map((t) => t.wpm)) : 0;
 
@@ -190,11 +194,11 @@ export const HomePage = () => {
       setPendingNavigation(destination);
       setShowQuitConfirm(true);
     } else {
-      if (destination === 'settings') {
+      if (destination === "settings") {
         setShowSettings(true);
-      } else if (destination === 'terms') {
+      } else if (destination === "terms") {
         setShowTerms(true);
-      } else if (destination === 'privacy') {
+      } else if (destination === "privacy") {
         setShowPrivacy(true);
       } else {
         navigate(destination);
@@ -206,7 +210,7 @@ export const HomePage = () => {
     setShowQuitConfirm(false);
     setIsQuitting(true);
     playSound(200, 0.3, "sawtooth");
-    
+
     setTimeout(() => {
       setUserInput("");
       setTimeLeft(selectedDuration);
@@ -225,12 +229,12 @@ export const HomePage = () => {
         incorrectChars: 0,
         totalKeystrokes: 0,
       });
-      
-      if (pendingNavigation === 'settings') {
+
+      if (pendingNavigation === "settings") {
         setShowSettings(true);
-      } else if (pendingNavigation === 'terms') {
+      } else if (pendingNavigation === "terms") {
         setShowTerms(true);
-      } else if (pendingNavigation === 'privacy') {
+      } else if (pendingNavigation === "privacy") {
         setShowPrivacy(true);
       } else if (pendingNavigation) {
         navigate(pendingNavigation);
@@ -254,7 +258,7 @@ export const HomePage = () => {
     const prevLength = userInput.length;
     const newLength = value.length;
 
-    setMetrics(prev => ({
+    setMetrics((prev) => ({
       ...prev,
       totalKeystrokes: prev.totalKeystrokes + 1,
     }));
@@ -270,14 +274,14 @@ export const HomePage = () => {
           setMaxCombo(newCombo);
         }
         checkComboMilestone(newCombo);
-        setMetrics(prev => ({
+        setMetrics((prev) => ({
           ...prev,
           correctChars: prev.correctChars + 1,
         }));
         playSound(400 + Math.min(newCombo * 10, 400), 0.03, "square");
       } else {
         setCombo(0);
-        setMetrics(prev => ({
+        setMetrics((prev) => ({
           ...prev,
           incorrectChars: prev.incorrectChars + 1,
         }));
@@ -341,6 +345,7 @@ export const HomePage = () => {
   // Initialize target text
   useEffect(() => {
     if (!targetText) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTargetText(getRandomTextForMode(mode, difficulty));
     }
   }, [targetText, mode, difficulty]);
@@ -354,20 +359,24 @@ export const HomePage = () => {
     const timer = setInterval(() => {
       setElapsedTime((previousTime) => {
         const newTime = previousTime + 1;
-        
-        setMetrics(currentMetrics => {
-          const currentWpm = newTime === 0 
-            ? 0 
-            : Math.round(((currentMetrics.totalKeystrokes / 5) - (currentMetrics.incorrectChars / 5)) / (newTime / 60));
-          
-          setWpmHistory(prev => [...prev, { time: newTime, wpm: currentWpm }]);
-          
+
+        setMetrics((currentMetrics) => {
+          const currentWpm =
+            newTime === 0
+              ? 0
+              : Math.round(
+                  (currentMetrics.totalKeystrokes / 5 - currentMetrics.incorrectChars / 5) /
+                    (newTime / 60),
+                );
+
+          setWpmHistory((prev) => [...prev, { time: newTime, wpm: currentWpm }]);
+
           return currentMetrics;
         });
-        
+
         return newTime;
       });
-      
+
       setTimeLeft((previousTime) => {
         if (previousTime <= 1) {
           clearInterval(timer);
@@ -382,6 +391,7 @@ export const HomePage = () => {
     }, 1000);
 
     return () => clearInterval(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStarted, isFinished]);
 
   // Test finish effect
@@ -398,15 +408,18 @@ export const HomePage = () => {
         selectedDuration,
         wpmHistory: [...wpmHistory],
       };
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPendingResult(result);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowGraphResults(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFinished]);
 
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         if (showGraphResults) {
           skipSave();
         } else if (showNameInput) {
@@ -414,28 +427,43 @@ export const HomePage = () => {
         } else if (showSettings) {
           setShowSettings(false);
         }
-      } else if (e.key === 'Enter') {
+      } else if (e.key === "Enter") {
         if (showGraphResults) {
           continueToNameInput();
         } else if (showNameInput && playerName.trim()) {
           saveResult();
-        } else if (!isStarted && !isFinished && !showSettings && !showNameInput && !showGraphResults) {
+        } else if (
+          !isStarted &&
+          !isFinished &&
+          !showSettings &&
+          !showNameInput &&
+          !showGraphResults
+        ) {
           startTest();
         } else if (isFinished && !showGraphResults && !showNameInput) {
           startTest();
         }
       }
     };
-    
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [showSettings, showNameInput, showGraphResults, playerName, isStarted, isFinished, selectedDuration]);
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    showSettings,
+    showNameInput,
+    showGraphResults,
+    playerName,
+    isStarted,
+    isFinished,
+    selectedDuration,
+  ]);
 
   // Scroll visible text
   const charsPerLine = 60;
   const currentPosition = userInput.length;
   const currentLine = Math.floor(currentPosition / charsPerLine);
-  
+
   if (currentLine > 1 && visibleStartIndex < currentLine - 1) {
     setVisibleStartIndex(currentLine - 1);
   }
@@ -444,29 +472,27 @@ export const HomePage = () => {
     <div className="app">
       <div className="scanlines"></div>
       <div className="grid-bg"></div>
-      
+
       {((!isStarted && !isFinished) || isGlitching) && (
         <>
           <MatrixWaterfall key="left-waterfall" side="left" isDisappearing={isGlitching} />
           <MatrixWaterfall key="right-waterfall" side="right" isDisappearing={isGlitching} />
         </>
       )}
-      
+
       {comboMilestone && (
         <MilestoneAnimation milestone={comboMilestone} color={getComboColor(comboMilestone)} />
       )}
-      
-      <Navbar 
-        onShowSettings={() => handleNavigateWithQuit('settings')}
-        onNavigateStats={() => handleNavigateWithQuit('/stats')}
+
+      <Navbar
+        onShowSettings={() => handleNavigateWithQuit("settings")}
+        onNavigateStats={() => handleNavigateWithQuit("/stats")}
         isGameActive={isStarted && !isFinished}
       />
 
-      <main className="main">
-        {isQuitting && (
-          <div className="red-static-overlay"></div>
-        )}
+      {isQuitting && <div className="red-static-overlay"></div>}
 
+      <main className="main">
         <section className="game-area">
           {!isGlitching && !isStarted && !isFinished && (
             <DurationSelector
@@ -476,7 +502,7 @@ export const HomePage = () => {
               onSelectDuration={handleDurationSelect}
             />
           )}
-          
+
           {isGlitching && (
             <div className="glitch-disappear">
               <DurationSelector
@@ -488,7 +514,7 @@ export const HomePage = () => {
             </div>
           )}
 
-          {(isStarted || isFinished) && (
+          {(isStarted || isFinished) && !isQuitting && (
             <div className={!hasWarped ? "warp-in" : ""}>
               <HUD
                 timeLeft={timeLeft}
@@ -504,18 +530,18 @@ export const HomePage = () => {
           {!isGlitching && !isStarted && !isFinished && (
             <div className="ready-screen-standalone">
               <div className="ready-text">READY TO HIT THE GRID?</div>
-              <div className="ready-subtitle">Press START or hit the enter key to begin</div>
+              <div className="ready-subtitle">CLICK START OR HIT THE ENTER KEY TO BEGIN</div>
               <button className="game-btn primary start-btn-inline" onClick={startTest}>
                 <span className="btn-text">START</span>
                 <span className="btn-glow"></span>
               </button>
             </div>
           )}
-          
+
           {isGlitching && (
             <div className="ready-screen-standalone glitch-disappear">
               <div className="ready-text">READY TO HIT THE GRID?</div>
-              <div className="ready-subtitle">Press START or hit the enter key to begin</div>
+              <div className="ready-subtitle">CLICK START OR HIT THE ENTER KEY TO BEGIN</div>
               <button className="game-btn primary start-btn-inline">
                 <span className="btn-text">START</span>
                 <span className="btn-glow"></span>
@@ -523,11 +549,12 @@ export const HomePage = () => {
             </div>
           )}
 
-          {(isStarted || isFinished) && (
+          {(isStarted || isFinished) && !isQuitting && (
             <div className={!hasWarped ? "warp-in-delayed" : ""}>
               <TypingArea
                 isStarted={isStarted}
                 isFinished={isFinished}
+                isQuitting={isQuitting}
                 targetText={targetText}
                 userInput={userInput}
                 visibleStartIndex={visibleStartIndex}
@@ -547,18 +574,18 @@ export const HomePage = () => {
 
       <footer className="footer">
         <div className="footer-text">
-          <button 
-            className="footer-link" 
-            onClick={() => handleNavigateWithQuit('terms')}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          <button
+            className="footer-link"
+            onClick={() => handleNavigateWithQuit("terms")}
+            style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
           >
             Terms
           </button>
           <span className="footer-separator">|</span>
-          <button 
-            className="footer-link" 
-            onClick={() => handleNavigateWithQuit('privacy')}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          <button
+            className="footer-link"
+            onClick={() => handleNavigateWithQuit("privacy")}
+            style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
           >
             Privacy
           </button>

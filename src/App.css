@@ -605,13 +605,15 @@ body {
   border-top: 4px solid var(--primary);
   padding: 40px;
   margin-bottom: 24px;
-  height: 300px;
+  height: 200px;
   overflow: hidden;
   position: relative;
   cursor: text;
   box-shadow: 
     inset 0 0 30px rgba(0, 255, 136, 0.1),
     0 10px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
 }
 
 .ready-screen {
@@ -654,6 +656,7 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   transition: transform 0.3s ease;
+  padding-top: 30px;
 }
 
 .char {
@@ -2728,7 +2731,7 @@ button:focus-visible {
 
 /* Red static glitch overlay for quit */
 .red-static-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
