@@ -402,8 +402,9 @@ export const HomePage = () => {
   useEffect(() => {
     if (isFinished && elapsedTime > 0 && !showGraphResults && !showNameInput) {
       const isRecord = wpm > bestWpm && bestWpm > 0;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsNewRecord(isRecord);
-      
+
       const result = {
         wpm,
         rawWpm,
@@ -415,8 +416,9 @@ export const HomePage = () => {
         selectedDuration,
         wpmHistory: [...wpmHistory],
       };
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+
       setPendingResult(result);
+
       setShowGraphResults(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

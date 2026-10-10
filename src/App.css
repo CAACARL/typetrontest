@@ -3536,7 +3536,7 @@ button:focus-visible {
   .main .typing-area {
     height: auto !important;
     flex: 1 !important;
-    min-height: 200px;
+    min-height: calc(100vh - 250px) !important;
     max-height: none !important;
     overflow: visible !important;
     display: flex !important;
