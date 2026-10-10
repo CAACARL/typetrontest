@@ -69,6 +69,7 @@ export const HomePage = () => {
     totalKeystrokes: 0,
   });
   const [wpmHistory, setWpmHistory] = useState<WpmDataPoint[]>([]);
+  const [isNewRecord, setIsNewRecord] = useState(false);
 
   // Audio hook
   const { playSound } = useAudio(soundEnabled);
@@ -146,7 +147,8 @@ export const HomePage = () => {
   };
 
   const resetTest = () => {
-    setTargetText(getRandomTextForMode(mode, difficulty));
+    const newText = getRandomTextForMode(mode, difficulty);
+    setTargetText(newText);
     setUserInput("");
     setTimeLeft(selectedDuration);
     setIsFinished(false);
@@ -157,6 +159,7 @@ export const HomePage = () => {
     setVisibleStartIndex(0);
     setWpmHistory([]);
     setShowGraphResults(false);
+    setIsNewRecord(false);
     setMetrics({
       correctChars: 0,
       incorrectChars: 0,
@@ -181,6 +184,7 @@ export const HomePage = () => {
       setVisibleStartIndex(0);
       setWpmHistory([]);
       setShowGraphResults(false);
+      setIsNewRecord(false);
       setMetrics({
         correctChars: 0,
         incorrectChars: 0,
@@ -397,6 +401,9 @@ export const HomePage = () => {
   // Test finish effect
   useEffect(() => {
     if (isFinished && elapsedTime > 0 && !showGraphResults && !showNameInput) {
+      const isRecord = wpm > bestWpm && bestWpm > 0;
+      setIsNewRecord(isRecord);
+      
       const result = {
         wpm,
         rawWpm,
@@ -522,6 +529,7 @@ export const HomePage = () => {
                 errors={metrics.incorrectChars}
                 isFinished={isFinished}
                 bestWpm={bestWpm}
+                isNewRecord={isNewRecord}
               />
             </div>
           )}
@@ -548,19 +556,29 @@ export const HomePage = () => {
             </div>
           )}
 
-          {(isStarted || isFinished) && !isQuitting && (
+          {isStarted && !isFinished && !isQuitting && (
             <div className={!hasWarped ? "warp-in-delayed" : ""}>
               <TypingArea
                 isStarted={isStarted}
                 isFinished={isFinished}
-                isQuitting={isQuitting}
                 targetText={targetText}
                 userInput={userInput}
                 visibleStartIndex={visibleStartIndex}
                 onInputChange={handleInputChange}
-                onRestart={resetTest}
-                onQuit={quitTest}
               />
+            </div>
+          )}
+
+          {(isStarted || isFinished) && !isQuitting && (
+            <div className="typing-controls">
+              <button className="game-btn secondary" onClick={resetTest}>
+                <span className="btn-text">RESTART</span>
+                <span className="btn-glow"></span>
+              </button>
+              <button className="game-btn danger" onClick={quitTest}>
+                <span className="btn-text">QUIT</span>
+                <span className="btn-glow"></span>
+              </button>
             </div>
           )}
         </section>
