@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 
 interface TypingAreaProps {
   isStarted: boolean;
@@ -34,7 +34,7 @@ export const TypingArea = ({
 
   const charsPerLine = 60;
   const startChar = visibleStartIndex * charsPerLine;
-  const endChar = startChar + (charsPerLine * 3);
+  const endChar = startChar + charsPerLine * 3;
   const visibleText = targetText.slice(startChar, endChar);
 
   return (
@@ -44,7 +44,7 @@ export const TypingArea = ({
           {visibleText.split("").map((character, index) => {
             const actualIndex = startChar + index;
             const typedCharacter = userInput[actualIndex];
-            let className = "char";
+            let className;
 
             if (typedCharacter === undefined) {
               className = "char pending";

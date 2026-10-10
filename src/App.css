@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap");
 
 * {
   margin: 0;
@@ -32,7 +32,7 @@ body {
   min-height: 100vh;
   background: var(--bg-dark);
   color: var(--text);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   position: relative;
   overflow-x: hidden;
 }
@@ -86,7 +86,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
+  background-image:
     linear-gradient(var(--border) 1px, transparent 1px),
     linear-gradient(90deg, var(--border) 1px, transparent 1px);
   background-size: 50px 50px;
@@ -209,7 +209,7 @@ body {
 }
 
 .milestone-title {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -219,18 +219,19 @@ body {
 }
 
 .milestone-value {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 64px;
   font-weight: 900;
   letter-spacing: 6px;
-  text-shadow: 
+  text-shadow:
     0 0 30px currentColor,
     0 0 60px currentColor;
   animation: milestone-glow 1s ease-in-out infinite;
 }
 
 @keyframes milestone-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -239,7 +240,8 @@ body {
 }
 
 @keyframes milestone-glow {
-  0%, 100% {
+  0%,
+  100% {
     filter: brightness(1);
   }
   50% {
@@ -300,7 +302,7 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 20px;
   font-weight: 900;
   letter-spacing: 1.5px;
@@ -313,7 +315,8 @@ body {
 }
 
 @keyframes bracket-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -329,8 +332,7 @@ body {
   position: relative;
   display: inline-block;
   color: var(--primary);
-  text-shadow:
-    0 0 10px var(--primary-glow);
+  text-shadow: 0 0 10px var(--primary-glow);
 
   animation: glitch-flicker 3s infinite;
 }
@@ -354,7 +356,9 @@ body {
 }
 
 @keyframes glitch-green-left {
-  0%, 85%, 100% {
+  0%,
+  85%,
+  100% {
     clip-path: inset(0 0 0 0);
     transform: translate(0);
   }
@@ -374,14 +378,17 @@ body {
     transform: translate(-2px);
   }
 
-  92%, 100% {
+  92%,
+  100% {
     clip-path: inset(0 0 0 0);
     transform: translate(0);
   }
 }
 
 @keyframes glitch-green-right {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     clip-path: inset(0 0 0 0);
     transform: translate(0);
   }
@@ -401,14 +408,17 @@ body {
     transform: translate(2px);
   }
 
-  87%, 100% {
+  87%,
+  100% {
     clip-path: inset(0 0 0 0);
     transform: translate(0);
   }
 }
 
 @keyframes glitch-flicker {
-  0%, 90%, 100% {
+  0%,
+  90%,
+  100% {
     opacity: 1;
   }
 
@@ -439,7 +449,7 @@ body {
   background: transparent;
   border: none;
   color: var(--text-dim);
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -489,7 +499,7 @@ body {
 }
 
 .selector-label {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 14px;
   font-weight: 700;
   color: var(--text-dim);
@@ -508,7 +518,7 @@ body {
   background: var(--bg-darker);
   border: 2px solid var(--border-bright);
   color: var(--text-dim);
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
@@ -572,7 +582,7 @@ body {
 }
 
 .hud-label {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 11px;
   color: var(--text-dim);
   letter-spacing: 1px;
@@ -580,7 +590,7 @@ body {
 }
 
 .hud-value {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 24px;
   font-weight: 700;
   color: var(--text);
@@ -591,7 +601,8 @@ body {
 }
 
 @keyframes combo-glow {
-  0%, 100% {
+  0%,
+  100% {
     filter: brightness(1);
   }
   50% {
@@ -609,7 +620,7 @@ body {
   overflow: hidden;
   position: relative;
   cursor: text;
-  box-shadow: 
+  box-shadow:
     inset 0 0 30px rgba(0, 255, 136, 0.1),
     0 10px 40px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -623,7 +634,8 @@ body {
 }
 
 @keyframes pulse-fade {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -632,7 +644,7 @@ body {
 }
 
 .ready-text {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 42px;
   font-weight: 900;
   color: var(--primary);
@@ -648,7 +660,7 @@ body {
 }
 
 .text-display {
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 28px;
   line-height: 2;
   letter-spacing: 2px;
@@ -687,11 +699,13 @@ body {
 }
 
 @keyframes current-blink {
-  0%, 50% {
+  0%,
+  50% {
     background: var(--primary);
     box-shadow: 0 0 15px var(--primary-glow);
   }
-  51%, 100% {
+  51%,
+  100% {
     background: transparent;
     color: var(--text-dim);
   }
@@ -725,7 +739,7 @@ body {
 }
 
 .results-title {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 36px;
   font-weight: 900;
   color: var(--primary);
@@ -739,7 +753,7 @@ body {
   padding: 8px 20px;
   background: var(--accent);
   color: var(--text);
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -748,7 +762,8 @@ body {
 }
 
 @keyframes record-flash {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px var(--accent);
   }
   50% {
@@ -772,7 +787,7 @@ body {
 }
 
 .result-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -782,7 +797,7 @@ body {
 }
 
 .result-label {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 12px;
   color: var(--text-dim);
   letter-spacing: 1px;
@@ -790,7 +805,7 @@ body {
 }
 
 .result-value {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 32px;
   font-weight: 700;
   color: var(--text);
@@ -815,7 +830,7 @@ body {
   background: transparent;
   border: 2px solid var(--primary);
   color: var(--primary);
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -854,7 +869,8 @@ body {
 }
 
 @keyframes pulse-btn {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
   }
   50% {
@@ -914,7 +930,7 @@ body {
 }
 
 .confirm-text {
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 15px;
   line-height: 1.5;
   color: var(--text);
@@ -946,7 +962,7 @@ body {
 }
 
 .input-label {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 11px;
   color: var(--text-dim);
   letter-spacing: 1px;
@@ -960,7 +976,7 @@ body {
   background: var(--bg-dark);
   border: 2px solid var(--border-bright);
   color: var(--text);
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 1.25rem;
@@ -1061,7 +1077,7 @@ body {
 }
 
 .legal-modal-subtitle {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 13px;
   font-weight: 700;
   color: var(--primary);
@@ -1075,7 +1091,7 @@ body {
 }
 
 .legal-modal-text {
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 14px;
   line-height: 1.6;
   color: var(--text);
@@ -1083,7 +1099,7 @@ body {
 }
 
 .legal-modal-updated {
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 12px;
   font-style: italic;
   color: var(--text-dim);
@@ -1092,7 +1108,7 @@ body {
 }
 
 .legal-modal-list {
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 14px;
   line-height: 1.6;
   color: var(--text);
@@ -1142,7 +1158,7 @@ body {
 }
 
 .modal-title {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 1.25rem;
   font-weight: 900;
   color: var(--primary);
@@ -1204,7 +1220,7 @@ body {
 }
 
 .podium-rank {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 11px;
   font-weight: 700;
   color: var(--text-dim);
@@ -1212,7 +1228,7 @@ body {
 }
 
 .podium-wpm {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 22px;
   font-weight: 900;
   color: var(--primary);
@@ -1220,7 +1236,7 @@ body {
 }
 
 .podium-name {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 11px;
   font-weight: 600;
   color: var(--text);
@@ -1265,9 +1281,15 @@ body {
   gap: 6px;
 }
 
-.podium-place.first { order: 2; }
-.podium-place.second { order: 1; }
-.podium-place.third { order: 3; }
+.podium-place.first {
+  order: 2;
+}
+.podium-place.second {
+  order: 1;
+}
+.podium-place.third {
+  order: 3;
+}
 
 .podium-trophy {
   position: relative;
@@ -1279,7 +1301,7 @@ body {
 
 .podium-trophy::before,
 .podium-trophy::after {
-  content: '👑';
+  content: "👑";
   position: absolute;
   left: 0;
   top: 0;
@@ -1297,12 +1319,19 @@ body {
 }
 
 @keyframes trophy-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes trophy-glitch-left {
-  0%, 85%, 100% {
+  0%,
+  85%,
+  100% {
     clip-path: inset(0 0 0 0);
     transform: translate(0);
   }
@@ -1322,14 +1351,17 @@ body {
     transform: translate(-1px);
   }
 
-  92%, 100% {
+  92%,
+  100% {
     clip-path: inset(0 0 0 0);
     transform: translate(0);
   }
 }
 
 @keyframes trophy-glitch-right {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     clip-path: inset(0 0 0 0);
     transform: translate(0);
   }
@@ -1349,7 +1381,8 @@ body {
     transform: translate(1px);
   }
 
-  87%, 100% {
+  87%,
+  100% {
     clip-path: inset(0 0 0 0);
     transform: translate(0);
   }
@@ -1360,7 +1393,7 @@ body {
 }
 
 .podium-rank {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 14px;
   font-weight: 700;
   color: var(--text-dim);
@@ -1368,7 +1401,7 @@ body {
 }
 
 .podium-wpm {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 28px;
   font-weight: 900;
   color: var(--primary);
@@ -1376,7 +1409,7 @@ body {
 }
 
 .podium-name {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 12px;
   font-weight: 600;
   color: var(--text);
@@ -1436,7 +1469,7 @@ body {
 }
 
 .stat-value {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 2rem;
   font-weight: 900;
   color: var(--primary);
@@ -1445,7 +1478,7 @@ body {
 }
 
 .stat-label {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 0.7rem;
   font-weight: 700;
   color: var(--text-dim);
@@ -1453,7 +1486,7 @@ body {
 }
 
 .stat-value {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 42px;
   font-weight: 900;
   color: var(--primary);
@@ -1462,7 +1495,7 @@ body {
 }
 
 .stat-label {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 12px;
   color: var(--text-dim);
   letter-spacing: 1px;
@@ -1529,7 +1562,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 11px;
   font-weight: 700;
   color: var(--primary);
@@ -1555,7 +1588,7 @@ body {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--border-bright);
   color: var(--text-dim);
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -1567,7 +1600,7 @@ body {
 }
 
 .filter-pill::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -1592,7 +1625,9 @@ body {
   background: var(--primary);
   border-color: var(--primary);
   color: var(--bg-dark);
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 0 15px rgba(0, 255, 136, 0.5),
+    inset 0 0 10px rgba(255, 255, 255, 0.2);
   animation: pill-select 0.3s ease;
 }
 
@@ -1606,13 +1641,19 @@ body {
 }
 
 @keyframes pill-select {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .section-title {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 14px;
   font-weight: 700;
   color: var(--text);
@@ -1647,7 +1688,7 @@ body {
 }
 
 .history-stat {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-weight: 700;
   text-align: center;
 }
@@ -1665,7 +1706,7 @@ body {
 
 .history-badge {
   padding: 2px 4px;
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.3px;
@@ -1712,7 +1753,7 @@ body {
 }
 
 .history-player-name {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 12px;
   font-weight: 600;
   color: var(--text);
@@ -1729,7 +1770,7 @@ body {
 }
 
 .history-date {
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 10px;
   color: var(--text-dim);
 }
@@ -1743,7 +1784,7 @@ body {
 }
 
 .history-rank {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 16px;
   font-weight: 700;
   color: var(--text-dim);
@@ -1762,7 +1803,7 @@ body {
 }
 
 .history-name {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 15px;
   font-weight: 600;
   color: var(--text);
@@ -1773,7 +1814,7 @@ body {
 }
 
 .history-wpm {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 26px;
   font-weight: 700;
   color: var(--primary);
@@ -1807,7 +1848,6 @@ body {
   white-space: nowrap;
 }
 
-
 .history-accuracy {
   color: var(--secondary);
 }
@@ -1831,7 +1871,7 @@ body {
 
 .setting-label {
   display: block;
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 12px;
   font-weight: 700;
   color: var(--text);
@@ -1856,7 +1896,7 @@ body {
   background: var(--bg-dark);
   border: 2px solid var(--border-bright);
   color: var(--text-dim);
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -1884,7 +1924,7 @@ body {
   background: transparent;
   border: 2px solid var(--danger);
   color: var(--danger);
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -1916,7 +1956,7 @@ body {
 }
 
 .footer-version {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   color: var(--primary);
 }
 
@@ -2095,7 +2135,7 @@ button:focus-visible {
 }
 
 .summary-label {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 8px;
   color: var(--text-dim);
   letter-spacing: 0.3px;
@@ -2104,7 +2144,7 @@ button:focus-visible {
 }
 
 .summary-value {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 18px;
   font-weight: 900;
   color: var(--primary);
@@ -2118,7 +2158,7 @@ button:focus-visible {
 }
 
 .graph-title {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 10px;
   font-weight: 700;
   color: var(--primary);
@@ -2139,7 +2179,7 @@ button:focus-visible {
   justify-content: space-between;
   align-items: center;
   margin-top: 0.4rem;
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 9px;
   color: var(--text-dim);
   padding: 0 0.5rem;
@@ -2290,7 +2330,7 @@ button:focus-visible {
 }
 
 .detail-player-name {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 24px;
   font-weight: 700;
   color: var(--primary);
@@ -2314,7 +2354,7 @@ button:focus-visible {
 }
 
 .detail-stat-label {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 12px;
   color: var(--text-dim);
   letter-spacing: 1px;
@@ -2322,7 +2362,7 @@ button:focus-visible {
 }
 
 .detail-stat-value {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 32px;
   font-weight: 700;
   color: var(--text);
@@ -2357,7 +2397,7 @@ button:focus-visible {
 }
 
 .detail-info-label {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 12px;
   font-weight: 700;
   color: var(--text-dim);
@@ -2365,7 +2405,7 @@ button:focus-visible {
 }
 
 .detail-info-value {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 16px;
   font-weight: 600;
   color: var(--primary);
@@ -2408,7 +2448,7 @@ button:focus-visible {
   margin: 0 auto;
   padding: 2rem;
   color: #00ff88;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
 }
 
 .legal-title {
@@ -2473,7 +2513,9 @@ button:focus-visible {
 .footer-link {
   color: rgba(0, 255, 136, 0.7);
   text-decoration: none;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .footer-link:hover {
@@ -2497,56 +2539,56 @@ button:focus-visible {
     opacity: 1;
     transform: translateY(0);
   }
-  
+
   10% {
     opacity: 0.9;
     transform: translate(-3px, 2px);
     filter: drop-shadow(0 0 8px var(--primary));
   }
-  
+
   20% {
     opacity: 0.7;
     transform: translate(4px, -2px);
     clip-path: inset(20% 0 60% 0);
   }
-  
+
   30% {
     opacity: 0.8;
     transform: translate(-2px, 1px);
     clip-path: inset(60% 0 10% 0);
     filter: drop-shadow(0 0 12px var(--primary));
   }
-  
+
   40% {
     opacity: 0.5;
     transform: translate(3px, -3px);
     clip-path: inset(30% 0 40% 0);
   }
-  
+
   50% {
     opacity: 0.6;
     transform: translate(-4px, 2px);
     clip-path: inset(50% 0 20% 0);
   }
-  
+
   60% {
     opacity: 0.3;
     transform: translate(2px, -1px) scaleY(0.8);
     filter: drop-shadow(0 0 15px var(--primary));
   }
-  
+
   70% {
     opacity: 0.2;
     transform: translate(-3px, 3px) scaleY(0.5);
     clip-path: inset(40% 0 40% 0);
   }
-  
+
   85% {
     opacity: 0.1;
     transform: translateY(-20px) scaleY(0.2);
     filter: drop-shadow(0 0 20px var(--primary));
   }
-  
+
   100% {
     opacity: 0;
     transform: translateY(-30px) scaleY(0);
@@ -2575,43 +2617,43 @@ button:focus-visible {
     filter: blur(10px) hue-rotate(180deg);
     opacity: 0;
   }
-  
+
   15% {
     transform: translateY(0) translateZ(-150px) rotateX(20deg) scaleY(0.6);
     filter: blur(8px) hue-rotate(140deg);
     opacity: 0.3;
   }
-  
+
   30% {
     transform: translateY(0) translateZ(-100px) rotateX(15deg) scaleY(0.7);
     filter: blur(6px) hue-rotate(100deg);
     opacity: 0.5;
   }
-  
+
   45% {
     transform: translateY(0) translateZ(-60px) rotateX(10deg) scaleY(0.8);
     filter: blur(4px) hue-rotate(60deg);
     opacity: 0.7;
   }
-  
+
   60% {
     transform: translateY(0) translateZ(-30px) rotateX(5deg) scaleY(0.9);
     filter: blur(2px) hue-rotate(30deg);
     opacity: 0.85;
   }
-  
+
   75% {
     transform: translateY(0) translateZ(-10px) rotateX(2deg) scaleY(0.95);
     filter: blur(1px) hue-rotate(10deg);
     opacity: 0.95;
   }
-  
+
   90% {
     transform: translateY(0) translateZ(-2px) rotateX(0.5deg) scaleY(0.98);
     filter: blur(0.3px) hue-rotate(3deg);
     opacity: 0.98;
   }
-  
+
   100% {
     transform: translateY(0) translateZ(0) rotateX(0deg) scaleY(1);
     filter: blur(0px) hue-rotate(0deg);
@@ -2631,61 +2673,61 @@ button:focus-visible {
     filter: blur(0px) hue-rotate(0deg);
     opacity: 1;
   }
-  
+
   10% {
     transform: translateY(-5px) translateZ(-30px) rotateX(5deg) scaleY(0.92);
     filter: blur(2px) hue-rotate(20deg);
     opacity: 0.95;
   }
-  
+
   20% {
     transform: translateY(-12px) translateZ(-60px) rotateX(8deg) scaleY(0.85);
     filter: blur(4px) hue-rotate(40deg);
     opacity: 0.9;
   }
-  
+
   30% {
     transform: translateY(-20px) translateZ(-80px) rotateX(10deg) scaleY(0.8);
     filter: blur(5px) hue-rotate(60deg);
     opacity: 0.85;
   }
-  
+
   40% {
     transform: translateY(-30px) translateZ(-90px) rotateX(12deg) scaleY(0.78);
     filter: blur(6px) hue-rotate(80deg);
     opacity: 0.8;
   }
-  
+
   50% {
     transform: translateY(-40px) translateZ(-100px) rotateX(15deg) scaleY(0.75);
     filter: blur(7px) hue-rotate(100deg);
     opacity: 0.75;
   }
-  
+
   60% {
     transform: translateY(-48px) translateZ(-80px) rotateX(10deg) scaleY(0.8);
     filter: blur(5px) hue-rotate(60deg);
     opacity: 0.85;
   }
-  
+
   70% {
     transform: translateY(-55px) translateZ(-50px) rotateX(6deg) scaleY(0.88);
     filter: blur(3px) hue-rotate(30deg);
     opacity: 0.9;
   }
-  
+
   80% {
     transform: translateY(-60px) translateZ(-20px) rotateX(3deg) scaleY(0.94);
     filter: blur(1.5px) hue-rotate(15deg);
     opacity: 0.95;
   }
-  
+
   90% {
     transform: translateY(-64px) translateZ(-5px) rotateX(1deg) scaleY(0.98);
     filter: blur(0.5px) hue-rotate(5deg);
     opacity: 0.98;
   }
-  
+
   100% {
     transform: translateY(-68px) translateZ(0) rotateX(0deg) scaleY(1);
     filter: blur(0px) hue-rotate(0deg);
@@ -2710,7 +2752,7 @@ button:focus-visible {
 
 .ready-screen-standalone .ready-text {
   font-size: 2.5rem;
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   color: var(--primary);
   text-shadow: 0 0 20px var(--primary-glow);
   margin-bottom: 1rem;
@@ -2738,35 +2780,33 @@ button:focus-visible {
   bottom: 0;
   z-index: 9999;
   pointer-events: none;
-  background: 
-    repeating-linear-gradient(
-      0deg,
-      #ff0000 0px,
-      #000000 1px,
-      #ff0000 2px,
-      #000000 3px,
-      #ff0000 4px,
-      #000000 5px
-    );
+  background: repeating-linear-gradient(
+    0deg,
+    #ff0000 0px,
+    #000000 1px,
+    #ff0000 2px,
+    #000000 3px,
+    #ff0000 4px,
+    #000000 5px
+  );
   background-size: 100% 6px;
   animation: red-static-scroll 1.2s linear forwards;
   opacity: 0;
 }
 
 .red-static-overlay::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    repeating-linear-gradient(
-      90deg,
-      transparent 0px,
-      rgba(255, 0, 0, 0.3) 1px,
-      transparent 2px
-    );
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    rgba(255, 0, 0, 0.3) 1px,
+    transparent 2px
+  );
   animation: static-flicker 0.08s infinite steps(2);
 }
 
@@ -2775,52 +2815,52 @@ button:focus-visible {
     opacity: 0;
     background-position: 0 0;
   }
-  
+
   10% {
     opacity: 0.5;
     background-position: 0 10px;
   }
-  
+
   20% {
     opacity: 0.7;
     background-position: 0 -15px;
   }
-  
+
   30% {
     opacity: 0.85;
     background-position: 0 20px;
   }
-  
+
   40% {
     opacity: 0.9;
     background-position: 0 -25px;
   }
-  
+
   50% {
     opacity: 0.95;
     background-position: 0 30px;
   }
-  
+
   60% {
     opacity: 0.97;
     background-position: 0 -35px;
   }
-  
+
   70% {
     opacity: 0.98;
     background-position: 0 40px;
   }
-  
+
   80% {
     opacity: 0.99;
     background-position: 0 -45px;
   }
-  
+
   90% {
     opacity: 1;
     background-position: 0 50px;
   }
-  
+
   100% {
     opacity: 1;
     background-position: 0 0;
@@ -2828,7 +2868,8 @@ button:focus-visible {
 }
 
 @keyframes static-flicker {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -2850,7 +2891,7 @@ button:focus-visible {
 
 .game-btn.danger:hover {
   background: rgba(255, 0, 85, 0.2);
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba(255, 0, 85, 0.3),
     inset 0 0 20px rgba(255, 0, 85, 0.1);
 }
@@ -2882,7 +2923,7 @@ button:focus-visible {
 
 .complete-title {
   font-size: 2rem;
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   color: var(--primary);
   text-shadow: 0 0 20px var(--primary-glow);
   letter-spacing: 0.2em;
@@ -2911,7 +2952,7 @@ button:focus-visible {
 }
 
 .stats-page-title {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 2.5rem;
   font-weight: 900;
   color: var(--primary);
@@ -2922,8 +2963,15 @@ button:focus-visible {
 }
 
 @keyframes glow-pulse {
-  0%, 100% { text-shadow: 0 0 20px var(--primary-glow); }
-  50% { text-shadow: 0 0 30px var(--primary-glow), 0 0 40px var(--primary-glow); }
+  0%,
+  100% {
+    text-shadow: 0 0 20px var(--primary-glow);
+  }
+  50% {
+    text-shadow:
+      0 0 30px var(--primary-glow),
+      0 0 40px var(--primary-glow);
+  }
 }
 
 .stats-page-summary {
@@ -2948,14 +2996,14 @@ button:focus-visible {
 }
 
 .summary-number {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 1.5rem;
   font-weight: 900;
   color: var(--primary);
 }
 
 .summary-text {
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 0.75rem;
   color: var(--text-dim);
   text-transform: uppercase;
@@ -2995,12 +3043,17 @@ button:focus-visible {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .empty-title {
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 1.5rem;
   color: var(--text-dim);
   margin-bottom: 1rem;
@@ -3008,7 +3061,7 @@ button:focus-visible {
 }
 
 .empty-text {
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 1rem;
   color: var(--text-dim);
   margin-bottom: 2rem;
@@ -3020,7 +3073,7 @@ button:focus-visible {
   background: var(--primary);
   color: var(--bg-dark);
   border: none;
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: 2px;
@@ -3076,7 +3129,7 @@ button:focus-visible {
 }
 
 .stat-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -3134,7 +3187,7 @@ button:focus-visible {
   background: transparent;
   border: 2px solid var(--danger);
   color: var(--danger);
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -3184,7 +3237,7 @@ button:focus-visible {
 }
 
 .filter-pill::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -3203,9 +3256,15 @@ button:focus-visible {
 }
 
 @keyframes pill-select {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .empty-filter-state {
@@ -3228,7 +3287,7 @@ button:focus-visible {
 }
 
 .empty-state-text {
-  font-family: 'Rajdhani', monospace;
+  font-family: "Rajdhani", monospace;
   font-size: 1rem;
   color: var(--text-dim);
   margin-bottom: 1.5rem;
@@ -3239,7 +3298,7 @@ button:focus-visible {
   background: var(--primary);
   color: var(--bg-dark);
   border: none;
-  font-family: 'Orbitron', monospace;
+  font-family: "Orbitron", monospace;
   font-weight: 700;
   font-size: 0.875rem;
   letter-spacing: 1px;
@@ -3264,11 +3323,21 @@ button:focus-visible {
   transition: all 0.3s ease;
 }
 
-.history-item:nth-child(1) { animation-delay: 0.05s; }
-.history-item:nth-child(2) { animation-delay: 0.1s; }
-.history-item:nth-child(3) { animation-delay: 0.15s; }
-.history-item:nth-child(4) { animation-delay: 0.2s; }
-.history-item:nth-child(5) { animation-delay: 0.25s; }
+.history-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.history-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.history-item:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.history-item:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.history-item:nth-child(5) {
+  animation-delay: 0.25s;
+}
 
 @keyframes slide-in {
   from {
@@ -3330,5 +3399,21 @@ button:focus-visible {
   .filter-pill {
     font-size: 9px;
     padding: 3px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main .typing-area {
+    height: auto !important;
+    min-height: 200px;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block;
+  }
+}
+
+@media (hover: none) {
+  .duration-btn.active:hover:not(:disabled) {
+    color: var(--bg-dark);
   }
 }
